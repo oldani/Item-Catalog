@@ -1,12 +1,13 @@
 from flask import Flask
+from . import resources
 from .extensions import db, migrate, api
 
 
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
-    register_extensions(app)
     register_resources()
+    register_extensions(app)
 
     return app
 
@@ -18,4 +19,5 @@ def register_extensions(app):
 
 
 def register_resources():
-    pass
+    api.add_resource(resources.Categories, '/categories',
+                     '/categories/<int:id>')
