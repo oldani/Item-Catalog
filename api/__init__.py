@@ -14,7 +14,7 @@ def create_app(config):
 
 def register_extensions(app):
     db.init_app(app)
-    migrate.init_app(app)
+    migrate.init_app(app, db)
     api.init_app(app)
 
 
