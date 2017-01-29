@@ -12,7 +12,7 @@ class Item(db.Model):
                        onupdate=datetime.now)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', backref=db.backref('items',
-                               lazy='dynamic'))
+                               lazy='joined'))
 
     def __repr__(self):
         return "<Item: {}".format(self.name)
