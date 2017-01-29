@@ -3,6 +3,7 @@ from flask_restful import Resource, marshal_with
 from ..extensions import db
 from ..models import CategoryModel
 from ..utils.outputs import CATEGORY_FIELDS
+from ..utils.parsers import category_parser
 
 
 class Categories(Resource):
@@ -13,7 +14,7 @@ class Categories(Resource):
 
     @marshal_with(CATEGORY_FIELDS)
     def post(self):
-        category = request.form.to_dict()
+        category = category_parser.parse_args()
         new_categoty = CategoryModel(**category)
         db.session.add(new_categoty)
         db.session.commit()
