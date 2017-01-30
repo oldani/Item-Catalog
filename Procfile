@@ -1,0 +1,1 @@
+web: gunicorn manage:app -b 127.0.0.1:$PORT
