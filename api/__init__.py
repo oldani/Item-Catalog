@@ -19,7 +19,7 @@ def register_extensions(app):
 
 
 def register_resources():
-    api.add_resource(resources.Categories, '/categories',
+    api.add_resource(resources.Categories, '/categories/',
                      '/categories/<int:id>')
-    api.add_resource(resources.Items, '/items',
-                     '/items/<int:id>')
+    api.add_resource(resources.Items, '/items/',
+                     '/items/<int:item_id>')
