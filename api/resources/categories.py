@@ -1,4 +1,4 @@
-from flask_restful import Resource, marshal_with
+from flask_restful import Resource, marshal_with, abort
 from ..extensions import db
 from ..models import CategoryModel
 from ..utils.outputs import CATEGORY_FIELDS
@@ -10,15 +10,21 @@ class Categories(Resource):
     @marshal_with(CATEGORY_FIELDS)
     def get(self, category_id=None):
         if category_id:
-            return CategoryModel.query.get_or_404(category_id)
+            category = CategoryModel.query.get(category_id)
+            if not category:
+                return abort(404, message="This category does not exist.")
+            return category
         return CategoryModel.query.all()
 
     @marshal_with(CATEGORY_FIELDS)
     def post(self):
         category = category_parser.parse_args()
         new_category = CategoryModel(**category)
-        db.session.add(new_category)
-        db.session.commit()
+        try:
+            db.session.add(new_category)
+            db.session.commit()
+        except IntegrityError:
+            abort(409, message="A category with that name already exist.")
         return new_category
 
     @marshal_with(CATEGORY_FIELDS)
