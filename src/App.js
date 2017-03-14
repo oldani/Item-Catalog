@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Navbar } from './components';
+import { Navbar, Categories, Items } from './components';
 
 
 class App extends Component {
   render() {
     return (
-      <Navbar />
+      <main>
+        <Navbar />
+        <section className="container">
+          <Categories />
+          <Items />
+        </section>
+      </main>
     );
   }
 }
