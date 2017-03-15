@@ -1,5 +1,8 @@
 import React from 'react';
 
-export const Items = () => (
+const Items = () => (
   <div></div>
 );
+
+
+export default Items;
