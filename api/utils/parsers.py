@@ -22,3 +22,8 @@ item_parser.add_argument('description', required=True, location='form',
 
 item_parser.add_argument('category', required=True, location='form',
                          help="Must supply wich is the category of the item.")
+
+# Request parser for Get method in Item Resourse
+item_get_parser = RequestParser()
+item_get_parser.add_argument('sort_by', type=str)
+item_get_parser.add_argument('order', type=str, default="asc")
