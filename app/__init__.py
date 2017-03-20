@@ -1,10 +1,12 @@
 from flask import Flask
+from . import views
 from .extensions import db, migrate
 
 
 def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
+    register_views(app)
     register_extensions(app)
 
     return app
@@ -13,3 +15,7 @@ def create_app(config):
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
+
+
+def register_views(app):
+    views.Main.register(app)
