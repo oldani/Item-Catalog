@@ -1,9 +1,9 @@
 from decouple import config
 from flask_script import Manager, Shell, Server
 from flask_migrate import MigrateCommand
-from api import create_app
-from api.extensions import db
-from api.settings import Development, Production
+from app import create_app
+from app.extensions import db
+from app.settings import Development, Production
 
 
 ENVIRONMENT = config("ENVIRONMENT", default="DEV")
