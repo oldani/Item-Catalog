@@ -40,7 +40,7 @@ const fetchGet = (dispatch, url, onSuccess, onError) => (
 export const fetchCategories = (dispatch) => {
   dispatch(requestStart(FETCH_CATEGORY_START));
   return fetchGet(dispatch,
-    'api/categories',
+    '/api/categories',
     FETCH_CATEGORY_SUCCESS,
     FETCH_CATEGOTY_ERROR);
 };
@@ -49,7 +49,7 @@ export const fetchCategories = (dispatch) => {
 export const fetchLatestItems = (dispatch) => {
   dispatch(requestStart(FETCH_LASTEST_ITEMS_START));
   return fetchGet(dispatch,
-    'api/items?sort_by=created&order=desc',
+    '/api/items?sort_by=created&order=desc',
     FETCH_LASTEST_ITEMS_SUCCESS,
     FETCH_LASTEST_ITEMS_ERROR);
 };
@@ -59,7 +59,7 @@ export const fetchItem = (itemId) => (
     dispatch(requestStart(FETCH_ITEM_START));
 
     return fetchGet(dispatch,
-      `api/items/${itemId}`,
+      `/api/items/${itemId}`,
       FETCH_ITEM_SUCCESS,
       FETCH_ITEM_ERROR);
   }
