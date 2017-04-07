@@ -13,6 +13,8 @@ class Item(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship('Category', backref=db.backref('items',
                                lazy='joined'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('items', lazy='joined'))
 
     def __repr__(self):
         return "<Item: {}".format(self.name)
