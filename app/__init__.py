@@ -1,6 +1,6 @@
 from flask import Flask
 from . import views
-from .extensions import db, migrate
+from .extensions import db, migrate, toolbar, login_manager
 
 
 def create_app(config):
@@ -14,8 +14,13 @@ def create_app(config):
 
 def register_extensions(app):
     db.init_app(app)
+    login_manager.init_app(app)
     migrate.init_app(app, db)
+    toolbar.init_app(app)
 
 
 def register_views(app):
     views.Main.register(app)
+    views.Category.register(app)
+    views.Item.register(app)
+    views.Login.register(app)
