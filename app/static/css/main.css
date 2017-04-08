@@ -5,3 +5,9 @@
   align-items: center;
   height: 150px;
 }
+
+.nav-profile-picture {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}

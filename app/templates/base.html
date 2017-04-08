@@ -60,7 +60,8 @@
               </a>
             </li>
           {% else %}
-            <li class="nav-item dropdown">
+            <li class="d-flex nav-item dropdown">
+              <img class="nav-profile-picture" src=" {{ current_user.picture }}">
               <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                 {{ current_user.name }}
               </a>
