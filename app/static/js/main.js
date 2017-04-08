@@ -1,3 +1,5 @@
+
+
 (() => {
   const facebookLoginUrl = window.facebookLogin;
   const googleLoginUrl = window.googleLogin;
@@ -8,7 +10,8 @@
         $.post(facebookLoginUrl, {
           token: response.authResponse.accessToken
         })
-        .done(_ => document.location.reload());
+        .done(_ => document.location.reload())
+        .fail(err => console.log(err.responseText));
       } else {
         console.error(response);
       };
@@ -16,6 +19,20 @@
   });
 
   $('.btn-google').on('click', evt => {
-    // pass
+
+    const singInCallback = (authResponse) => {
+      if (authResponse.code) {
+        $.post(googleLoginUrl, {
+          token: authResponse.code
+        })
+        .done(_ => document.location.reload())
+        .fail(err => console.log(err.responseText));
+      } else {
+        console.error(authResponse);
+      };
+    };
+    auth2.grantOfflineAccess()
+      .then(singInCallback);
+
   });
 })()
