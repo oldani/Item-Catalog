@@ -11,6 +11,10 @@ body {
   border: 1px ridge;
 }
 
+.no-padding {
+  padding: 0;
+}
+
 #login-modal .modal-body {
   display: flex;
   justify-content: space-around;

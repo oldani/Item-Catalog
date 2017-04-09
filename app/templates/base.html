@@ -77,6 +77,16 @@
     {% include 'login_modal.html' %}
   {% endif %}
   <main class="container">
+    {% if current_user.is_authenticated %}
+      <div class="row">
+        <div class="col-12 d-flex justify-content-end no-padding">
+          <div class="btn-group">
+            <a class="btn btn-secondary" href="{{ url_for('Category:new') }}">New Category</a>
+            <a class="btn btn-secondary" href="{{ url_for('Item:new') }}">New Item</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
     <div class="row main">
       {% block content %}
       {% endblock %}
