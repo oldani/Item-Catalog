@@ -1,3 +1,16 @@
+body {
+  background-color: #f7f7f7;
+}
+
+.header {
+  margin-bottom: 50px;
+}
+
+.main {
+  background-color: white;
+  border: 1px ridge;
+}
+
 #login-modal .modal-body {
   display: flex;
   justify-content: space-around;
@@ -10,4 +23,8 @@
   width: 45px;
   height: 45px;
   border-radius: 50%;
+}
+
+.categories-container {
+  border-right: 2px groove;
 }

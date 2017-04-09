@@ -1,24 +1,19 @@
-{% extends "base.html" %}
+{% extends "main.html" %}
 
-{% block content %}
-  <main class="container">
-    <div class="row">
-    <div class="col-xs-6 col-sm-4">
-      <ul>
-        <li>
-          <a href="{{url_for('Category:get', id=category.id)}}">{{ category.name }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-xs-6 col-sm-8">
-      <ul>
-        {% for item in category.items %}
-          <li>
-            <a href="{{url_for('Item:get', id=item.id)}}">{{ item.name }}</a>
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-    </div>
-  </main>
+{% block category_title %} Category {% endblock %}
+{% block category %}
+  <li>
+    <a href="{{url_for('Category:get', id=category.id)}}">{{ category.name }}</a>
+  </li>
+{% endblock %}
+{% block category_content %}
+  <a class="btn btn-default" href="{{ url_for('Main:index') }}"> << Go Back</a>
+{% endblock %}
+
+{% block item %}
+  {% for item in category.items %}
+    <li>
+      <a href="{{url_for('Item:get', id=item.id)}}">{{ item.name }}</a>
+    </li>
+  {% endfor %}
 {% endblock %}

@@ -44,13 +44,12 @@
   </script>
 </head>
 <body>
-  <header>
-    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <header class="header">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar">
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="{{url_for('Main:index')}}">Item Catalog</a>
-
       <div class="collapse navbar-collapse justify-content-end" id="navbar">
         <ul class="navbar-nav">
           {% if not current_user.is_authenticated %}
@@ -75,29 +74,14 @@
     </nav>
   </header>
   {% if not current_user.is_authenticated %}
-    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Sign in / Sign up</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <button class="nav-link btn btn-social btn-facebook">
-                <i class="fa fa-facebook"></i>Continue with Facebook
-            </button>
-            <button class="nav-link btn btn-social btn-google">
-              <i class="fa fa-google"></i>Cotinue with Google
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% include 'login_modal.html' %}
   {% endif %}
-  {% block content %}
-  {% endblock %}
+  <main class="container">
+    <div class="row main">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
