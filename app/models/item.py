@@ -18,3 +18,17 @@ class Item(db.Model):
 
     def __repr__(self):
         return "<Item: {}".format(self.name)
+
+    @classmethod
+    def add(cls, **kwargs):
+        new = cls(**kwargs)
+        db.session.add(new)
+        db.session.commit()
+        return new
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

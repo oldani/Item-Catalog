@@ -1,6 +1,7 @@
 
 
 (() => {
+  // Oauth logins FB and Google
   const facebookLoginUrl = window.facebookLogin;
   const googleLoginUrl = window.googleLogin;
 
@@ -34,5 +35,15 @@
     auth2.grantOfflineAccess()
       .then(singInCallback);
 
+  });
+
+  // Delete items
+  const deleteItemUrl = window.deleteItemUrl;
+  $('.delete-btn').on('click', (evt) => {
+    $.ajax(deleteItemUrl, {
+      method: 'DELETE'
+    })
+    .done(_ => window.location.replace("/"))
+    .fail(err => console.log(err.responseText));
   });
 })()
