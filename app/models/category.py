@@ -2,6 +2,7 @@ from ..extensions import db
 
 
 class Category(db.Model):
+    """ Categories model. """
 
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(100), unique=True)

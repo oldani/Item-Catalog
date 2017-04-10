@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 class Item(db.Model):
+    """ Items model. """
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), unique=True)
@@ -27,8 +28,11 @@ class Item(db.Model):
         return new
 
     def update(self):
+        """ If the instace have been mutated or updated, commit the session
+            to save the changes. """
         db.session.commit()
 
     def delete(self):
+        """ Delete the instance reference from db and commit the session. """
         db.session.delete(self)
         db.session.commit()

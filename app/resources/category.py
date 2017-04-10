@@ -4,6 +4,7 @@ from ..utils.outputs import CATEGORY_FIELDS
 
 
 class Categories(Resource):
+    """ Categories Api endpoint. """
 
     @marshal_with(CATEGORY_FIELDS)
     def get(self, category_id=None):

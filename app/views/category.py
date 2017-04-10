@@ -6,6 +6,11 @@ from ..forms import CategoryForm
 
 
 class Category(FlaskView):
+    """
+        TODO:
+            - Finish CRUD implementation.
+              Note: Since no specified in the rubric this feature
+              skipping by now (time/money matters) """
 
     def get(self, id):
         category = CategoryModel.query.get_or_404(id)
