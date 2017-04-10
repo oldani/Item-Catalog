@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="482755493047-t40342vqoemcob142fpigqof64cgboid.apps.googleusercontent.com">
+  <title></title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap-social.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+  </script>
+  <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>
+  </script>
+  <script>
+    // Facebook Js SDK
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '762404293916206',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+
+    // Google Auth load
+    function start() {
+      gapi.load('auth2', () => {
+        auth2 = gapi.auth2.init({
+          client_id: document.querySelector("meta[name='google-signin-client_id']").content
+          });
+        return auth2;
+      });
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{{url_for('Main:index')}}">Item Catalog</a>
+      <div class="collapse navbar-collapse justify-content-end" id="navbar">
+        <ul class="navbar-nav">
+          {% if not current_user.is_authenticated %}
+            <li class="nav-item active">
+              <a class="nav-link btn btn-outline-primary" href="#" data-toggle="modal" data-target="#login-modal">
+                Sign in / Sign up
+              </a>
+            </li>
+          {% else %}
+            <li class="d-flex nav-item dropdown">
+              <img class="nav-profile-picture" src=" {{ current_user.picture }}">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                {{ current_user.name }}
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ url_for('Login:logout') }}">Log out</a>
+              </div>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </header>
+  {% if not current_user.is_authenticated %}
+    {% include 'login_modal.html' %}
+  {% endif %}
+  <main class="container">
+    {% if current_user.is_authenticated %}
+      <div class="row">
+        <div class="col-12 d-flex justify-content-end no-padding">
+          <div class="btn-group">
+            <a class="btn btn-secondary" href="{{ url_for('Category:new') }}">New Category</a>
+            <a class="btn btn-secondary" href="{{ url_for('Item:new') }}">New Item</a>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+    <div class="row main">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </main>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script>
+    window.facebookLogin = '{{ url_for('Login:facebook') }}';
+    window.googleLogin = '{{ url_for('Login:google') }}';
+  </script>
+  <script src="{{ url_for('static', filename='js/main.js') }}" ></script>
+</body>
+</html>

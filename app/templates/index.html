@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+
+{% block category %}
+  {% for category in categories %}
+    <li>
+      <a href="{{url_for('Category:get', id=category.id)}}">{{ category.name }}</a>
+    </li>
+  {% endfor %}
+{% endblock %}
+
+{% block item_title %}Latest Items{% endblock %}
+{% block item %}
+  {% for item in items %}
+    <li>
+      <a href="{{url_for('Item:get', id=item.id)}}">{{ item.name }}</a>
+      <span class="text-lowercase">
+        <small>({{ item.category.name }})</small>
+      </span>
+    </li>
+  {% endfor %}
+{% endblock %}
