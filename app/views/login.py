@@ -126,13 +126,13 @@ class Login(FlaskView):
             user_info['picture'] = picture.url if picture else ''
         return user_info
 
-    def login(self, user):
+    def login(self, userd):
         """ Recive a user info and try to log in it.
             If an user does not exist create it. """
-        user = UserModel.query.filter_by(email=user['email']).first()
+        user = UserModel.query.filter_by(email=userd['email']).first()
         if not user:
-            user = UserModel.add(name=user['name'], email=user['email'],
-                                 picture=user['picture'])
+            user = UserModel.add(name=userd['name'], email=userd['email'],
+                                 picture=userd['picture'])
         return login_user(user)
 
     def logout(self):
