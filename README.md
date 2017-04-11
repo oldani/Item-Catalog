@@ -12,7 +12,8 @@ An application that provides a list of items within a variety of categories an u
 ## Requirements
 - [Python 3](https://www.python.org/downloads/release/python-353/)
 - [Postgresql](https://www.postgresql.org/)
-- [Virtualenv `optional`](https://virtualenv.pypa.io/en/stable/)
+- [Vagrant](https://www.vagrantup.com/downloads.html)
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 - [A Google Cloud Account](console.developers.google.com)
 - [A Facebook Account](developers.facebook.com)
 
@@ -22,17 +23,17 @@ Once you have all the requirements setup:
 
 **Note:** Before seting up the environment, create a new project
 in the google console and Facebook for developers to get your Product
-credentials required for the use of Oauth. Also create a database.
+credentials required for the use of Oauth. Also database named `item-catalog`
+is created by default with a user:pass `ubuntu:123456`.
 
 1. Clone this repository.
   * Run `git clone https://github.com/oldani/Item-Catalog.git`
 in the console
-2. If using `virtualenv`
-  * Create an env by running `virtualenv -p python3 env` and
-activate it.
-3. In the project repository
-  * Run `pip install requirements.txt`
-    For user using Linux `libpq-dev` is required for psycopg2.
+2. `cd` into the repository and run `vagrant up && vagrant ssh`
+3. Once vm have been created and you have ssh
+  * `cd /vagrant`
+  * Run `source env/bin/activate`
+  * Run `pip install -r requirements.txt`
   * Edit the `env.example` file, replacing all the env vars
 example values with real ones. Once done rename the file to
 `.env`.
